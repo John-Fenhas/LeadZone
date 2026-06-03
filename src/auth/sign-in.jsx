@@ -1,32 +1,27 @@
-import { useEffect, useState } from "react"
-import { supabase } from "../supabaseClient"
-import { Link, useOutletContext } from "react-router-dom"
-
-
+import { useEffect, useState } from "react";
+import { supabase } from "../supabaseClient";
+import { Link, useOutletContext } from "react-router-dom";
 
 export default function SignIn() {
- 
   const [signInForm, setSignInForm] = useState({
-    email: '',
-    password: '',
-  })
+    email: "",
+    password: "",
+  });
 
   const { onSignInSuccess } = useOutletContext();
-
 
   async function submitBtn(e) {
     e.preventDefault();
     e.stopPropagation();
-    
+
     const { data, error } = await supabase.auth.signInWithPassword({
       email: signInForm.email,
-      password: signInForm.password
-    })
+      password: signInForm.password,
+    });
     if (error) {
       console.log("Sign in error:", error.message);
       return;
     }
-
 
     onSignInSuccess();
   }
@@ -55,7 +50,9 @@ export default function SignIn() {
             </div>
 
             <div>
-              <label className="block text-sm mb-1 text-slate-200">Password</label>
+              <label className="block text-sm mb-1 text-slate-200">
+                Password
+              </label>
               <input
                 type="password"
                 placeholder="••••••••"
@@ -90,8 +87,5 @@ export default function SignIn() {
         </div>
       </div>
     </div>
-
-
-
-  )
+  );
 }
