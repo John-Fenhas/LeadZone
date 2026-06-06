@@ -17,7 +17,7 @@ export default function AppHeader() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/70 backdrop-blur-xl border-b border-white/10">
-      <div className="w-full max-w-5/6 mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+      <div className="w-11/12 xl:max-w-5/6 mx-auto xl:px-10 h-16 flex items-center justify-between">
         <Link to="/dashboard">
           <div className="text-lg font-bold tracking-tight text-white">
             Lead<span className="text-indigo-400">Zone</span>
@@ -61,6 +61,5 @@ export default function AppHeader() {
         </div>
       </div>
     </header>
-
   );
 }

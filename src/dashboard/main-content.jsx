@@ -6,6 +6,8 @@ import Modal from "../components/modal";
 import Auth from "../auth/auth";
 import { useLeads } from "../context/LeadsContext";
 import Pagination from "./Pagination";
+import useIsMobile from "../hooks/isMobile";
+import MobileTable from "./MobileTable";
 
 export default function MainContent() {
   // // leads fetch and state set up
@@ -243,6 +245,8 @@ export default function MainContent() {
     goToPage,
   } = useLeads();
 
+  const isMobile = useIsMobile();
+
   return (
     <section className="relative min-h-screen flex flex-col items-center px-10 pt-22">
       <Filters
@@ -252,21 +256,34 @@ export default function MainContent() {
         handleFilter={handleFilter}
       />
 
-      <Table
-        openModal={openAddAndEditModal}
-        leads={filteredLeads}
-        onDelete={deleteLead}
-        onEdit={openAddAndEditModal}
-        sortBy={sortBy}
-        sortDir={sortDir}
-        handleSort={handleSort}
-      />
+      {isMobile ? (
+        <MobileTable
+          openModal={openAddAndEditModal}
+          leads={filteredLeads}
+          onDelete={deleteLead}
+          onEdit={openAddAndEditModal}
+          sortBy={sortBy}
+          sortDir={sortDir}
+          handleSort={handleSort}
+        />
+      ) : (
+        <Table
+          openModal={openAddAndEditModal}
+          leads={filteredLeads}
+          onDelete={deleteLead}
+          onEdit={openAddAndEditModal}
+          sortBy={sortBy}
+          sortDir={sortDir}
+          handleSort={handleSort}
+        />
+      )}
 
       <Modal
         isModalOpen={isAddandEditModalOpen}
         closeModal={closeAddandEditModal}
         selectedLead={selectedLead}
         editLead={editLead}
+        addLead={addLead}
       />
       <Pagination />
     </section>

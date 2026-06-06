@@ -66,7 +66,7 @@ export function LeadsProvider({ children }) {
       .eq("id", id);
 
     if (error) {
-      console.error("update error:", error);
+      console.error("update error:", error.message);
       return;
     }
     setLeads((prev) =>

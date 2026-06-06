@@ -11,7 +11,7 @@ export default function Table({
   handleSort,
 }) {
   return (
-    <main className="mt-6 w-5/6 bg-white/5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-xl">
+    <main className="mt-6 w-full xl:w-5/6 bg-white/5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-xl">
       <div className="px-4 py-4 border-b border-white/10">
         <p className="text-sm font-semibold text-white">Leads</p>
         <p className="text-xs text-slate-400 mt-1">

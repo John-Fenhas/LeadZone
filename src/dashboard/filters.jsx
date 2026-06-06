@@ -34,7 +34,7 @@ export default function Filters({
   ];
 
   return (
-    <div className="w-full lg:w-5/6 z-50">
+    <div className="w-full xl:w-5/6 ">
       {/* Header */}
       <div className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 flex justify-between items-center shadow-2xl backdrop-blur-xl">
         <div className="flex items-center gap-2">
@@ -45,7 +45,7 @@ export default function Filters({
           <button
             id="add-lead-btn"
             className="bg-indigo-600 text-xs text-white px-4 rounded-xl h-full hover:bg-indigo-500 transition shadow-[0_10px_30px_rgba(79,70,229,0.35)] add-lead-btn"
-            onClick={openModal}
+            onClick={() => openModal()}
           >
             + Add Lead
           </button>

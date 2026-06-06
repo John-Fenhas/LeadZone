@@ -9,7 +9,6 @@ export default function Pagination() {
     prevPage,
     goToPage,
   } = useLeads();
-  console.log(currentPage);
 
   const getPageNumbers = () => {
     const pages = [];
