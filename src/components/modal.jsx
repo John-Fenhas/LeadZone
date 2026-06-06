@@ -49,9 +49,9 @@ export default function Modal({
   const [formData, setFormData] = useState({
     status: "Fresh",
     name: "",
-    number: null,
+    number: "",
     email: "",
-    budget: null,
+    budget: "",
     destination: "",
     date: new Date(),
     callRecap: "",
@@ -64,9 +64,9 @@ export default function Modal({
       setFormData({
         status: selectedLead.status || "Fresh",
         name: selectedLead.name || "",
-        number: selectedLead.number || null,
+        number: selectedLead.number || "",
         email: selectedLead.email || "",
-        budget: selectedLead.budget || null,
+        budget: selectedLead.budget || "",
         destination: selectedLead.destination || "",
         date: selectedLead.date || new Date(),
         callRecap: selectedLead.callRecap || "",
@@ -75,9 +75,9 @@ export default function Modal({
       setFormData({
         status: "Fresh",
         name: "",
-        number: null,
+        number: "",
         email: "",
-        budget: null,
+        budget: "",
         destination: "",
         date: new Date(),
         callRecap: "",
@@ -98,9 +98,9 @@ export default function Modal({
     setFormData({
       status: "Fresh",
       name: "",
-      number: null,
+      number: "",
       email: "",
-      budget: null,
+      budget: "",
       destination: "",
       date: new Date(),
       callRecap: "",
@@ -122,7 +122,7 @@ export default function Modal({
   return (
     isModalOpen && (
       <div
-        className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center z-50 px-4 sm:px-4 pb-0 sm:pb-0"
+        className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center z-50 px-4  "
         onClick={closeModal}
       >
         <div
@@ -134,12 +134,11 @@ export default function Modal({
           "
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Drag handle (mobile only) */}
+          {/* Drag handle */}
           <div className="flex justify-center pt-3 pb-1 sm:hidden">
             <div className="w-10 h-1 rounded-full bg-white/20" />
           </div>
 
-          {/* Header — fixed inside the panel */}
           <div className="flex items-center justify-between px-6 pt-4 pb-3 sm:pt-6 border-b border-white/10 shrink-0">
             <h2 className="text-lg sm:text-xl font-semibold text-white">
               Add New Lead
@@ -189,7 +188,7 @@ export default function Modal({
                   Number
                 </label>
                 <input
-                  type="tel"
+                  type="text"
                   value={formData.number}
                   onChange={(e) =>
                     setFormData({ ...formData, number: e.target.value })
@@ -262,6 +261,7 @@ export default function Modal({
                   value={formData.date}
                   options={{
                     enableTime: true,
+                    disableMobile: true,
                     minDate: "today",
                     dateFormat: "Y-m-d H:i",
                   }}
@@ -280,9 +280,6 @@ export default function Modal({
               >
                 Save Lead
               </button>
-
-              {/* Bottom breathing room so last button clears the keyboard */}
-              <div className="h-2 sm:h-0" />
             </form>
           </div>
         </div>

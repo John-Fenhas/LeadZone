@@ -8,20 +8,27 @@ export default function SignIn() {
     password: "",
   });
 
+  const [error, setError] = useState(false);
+
   const { onSignInSuccess } = useOutletContext();
 
   async function submitBtn(e) {
     e.preventDefault();
     e.stopPropagation();
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: signInForm.email,
-      password: signInForm.password,
-    });
-    if (error) {
-      console.log("Sign in error:", error.message);
+    const { data, error: signInError } = await supabase.auth.signInWithPassword(
+      {
+        email: signInForm.email,
+        password: signInForm.password,
+      },
+    );
+    if (signInError) {
+      setError(true);
+      console.log("error");
+
       return;
     }
+    setError(false);
 
     onSignInSuccess();
   }
@@ -66,12 +73,19 @@ export default function SignIn() {
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-xl transition cursor-pointer shadow-[0_10px_30px_rgba(79,70,229,0.35)] font-semibold"
-          >
-            Continue
-          </button>
+          <div className="flex flex-col items-center">
+            <button
+              type="submit"
+              className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-xl transition cursor-pointer shadow-[0_10px_30px_rgba(79,70,229,0.35)] font-semibold mb-3"
+            >
+              Sign In
+            </button>
+            {error ? (
+              <span className="text-xs text-red-400 text-nowrap">
+                Invalid email or password!
+              </span>
+            ) : null}
+          </div>
         </form>
 
         <div className="text-center mt-6 text-sm text-slate-300">

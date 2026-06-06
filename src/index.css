@@ -1,8 +1,32 @@
 @import "tailwindcss";
 
-
-
+/*  custom date inp  */
 .flatpickr-day.selected {
-  background: rgb(79,57,246) !important;
+  background: rgb(79, 57, 246) !important;
   border: none;
+}
+
+/*  custom scroll bar  */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
 }

@@ -40,8 +40,12 @@ const statuses = [
   },
 ];
 
-function formatDate(isoDate) {
-  return new Date(isoDate).toLocaleString("en-GB", {
+export function MobileTableRow({ lead }) {
+  const [expanded, setExpanded] = useState(false);
+  const { openAddAndEditModal, deleteLead } = useLeads();
+
+  const isoDate = lead.date;
+  const date = new Date(isoDate).toLocaleString("en-GB", {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -49,110 +53,6 @@ function formatDate(isoDate) {
     minute: "2-digit",
     hour12: true,
   });
-}
-
-// ─── Desktop row (unchanged) ──────────────────────────────────────────────────
-export default function TableRow({ lead }) {
-  const selectedStatus =
-    statuses.find((s) => s.label === lead.status) ||
-    statuses.find((s) => s.label === "Fresh");
-
-  const { openAddAndEditModal, deleteLead } = useLeads();
-
-  return (
-    <tr className="border-t border-white/10 hover:bg-white/5 transition">
-      <td className="px-4 py-3 text-slate-200">
-        <span className={`px-2 py-0.5 rounded ${selectedStatus.color}`}>
-          {lead.status}
-        </span>
-      </td>
-      <td className="px-4 py-3 text-slate-200">{lead.name}</td>
-      <td className="px-4 py-3 text-slate-300">{lead.number}</td>
-      <td className="px-4 py-3 text-slate-300">{lead.email}</td>
-      <td className="px-4 py-3 text-slate-300">{lead.budget}</td>
-      <td className="px-4 py-3 text-slate-300">{lead.destination}</td>
-      <td className="px-4 py-3 text-slate-400 max-w-xs">{lead.callRecap}</td>
-      <td className="px-4 py-3 text-slate-400">{formatDate(lead.date)}</td>
-      <td className="px-4 py-3">
-        <div className="flex items-center gap-2 text-xs">
-          <button
-            onClick={() => openAddAndEditModal(lead)}
-            className="px-1.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-200 hover:bg-white/10 transition cursor-pointer"
-          >
-            <svg
-              width="20px"
-              height="14px"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M18.3785 8.44975L8.9636 17.8648C8.6844 18.144 8.3288 18.3343 7.94161 18.4117L4.99988 19.0001L5.58823 16.0583C5.66566 15.6711 5.85597 15.3155 6.13517 15.0363L15.5501 5.62132M18.3785 8.44975L19.7927 7.03553C20.1832 6.64501 20.1832 6.01184 19.7927 5.62132L18.3785 4.20711C17.988 3.81658 17.3548 3.81658 16.9643 4.20711L15.5501 5.62132M18.3785 8.44975L15.5501 5.62132"
-                stroke="#fff"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-          <button
-            onClick={() => deleteLead(lead.id)}
-            className="flex justify-center items-center px-2 py-1 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 hover:bg-red-500/20 transition cursor-pointer"
-          >
-            <svg
-              width="20px"
-              height="14px"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10 11V17"
-                stroke="#FCA5A5"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M14 11V17"
-                stroke="#FCA5A5"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M4 7H20"
-                stroke="#FCA5A5"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z"
-                stroke="#FCA5A5"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
-                stroke="#FCA5A5"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-      </td>
-    </tr>
-  );
-}
-
-// ─── Mobile card (tap to expand) ─────────────────────────────────────────────
-export function MobileTableRow({ lead }) {
-  const [expanded, setExpanded] = useState(false);
-  const { openAddAndEditModal, deleteLead } = useLeads();
 
   const selectedStatus =
     statuses.find((s) => s.label === lead.status) ||
@@ -160,7 +60,6 @@ export function MobileTableRow({ lead }) {
 
   return (
     <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-      {/* Tap target: header + glance info */}
       <button
         className="w-full text-left px-4 pt-4 pb-3 focus:outline-none"
         onClick={() => setExpanded((prev) => !prev)}
@@ -178,7 +77,6 @@ export function MobileTableRow({ lead }) {
             </span>
           </div>
 
-          {/* Chevron */}
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -194,7 +92,6 @@ export function MobileTableRow({ lead }) {
           </svg>
         </div>
 
-        {/* Budget + Destination always visible */}
         <div className="flex items-center gap-3 mt-2 text-xs text-slate-400">
           <span className="flex items-center gap-1">
             <svg
@@ -214,15 +111,14 @@ export function MobileTableRow({ lead }) {
         </div>
       </button>
 
-      {/* Expanded details */}
+      {/*expandable info*/}
       {expanded && (
         <div className="border-t border-white/10 px-4 py-3 flex flex-col gap-3">
-          {/* Detail rows */}
           <div className="grid grid-cols-2 gap-y-2.5 text-xs">
             {[
               { label: "Phone", value: lead.number },
               { label: "Email", value: lead.email },
-              { label: "Date", value: formatDate(lead.date) },
+              { label: "Date", value: date },
             ].map(({ label, value }) => (
               <div key={label} className="contents">
                 <span className="text-slate-500">{label}</span>
@@ -233,14 +129,12 @@ export function MobileTableRow({ lead }) {
             ))}
           </div>
 
-          {/* Call recap */}
           {lead.callRecap && (
             <div className="bg-white/5 rounded-xl px-3 py-2.5 text-xs text-slate-400 leading-relaxed">
               {lead.callRecap}
             </div>
           )}
 
-          {/* Actions */}
           <div className="flex gap-2 pt-1">
             <button
               onClick={() => openAddAndEditModal(lead)}
