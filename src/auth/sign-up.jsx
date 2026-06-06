@@ -58,8 +58,6 @@ export default function SignUp() {
 
     const snapShot = getSnapshotFromState();
 
-    console.log(snapShot);
-
     const { data, signUpError } = await supabase.auth.signUp({
       email: snapShot.email,
       password: snapShot.password,
