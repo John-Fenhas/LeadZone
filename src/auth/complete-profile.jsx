@@ -15,7 +15,6 @@ export default function CompleteProfile() {
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    console.log(user);
   }
 
   const { onProfileComplete } = useOutletContext();
