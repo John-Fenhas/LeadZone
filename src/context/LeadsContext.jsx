@@ -94,10 +94,11 @@ export function LeadsProvider({ children }) {
     if (lead) {
       setSelectedLead(lead);
       setIsAddandEditModalOpen(true);
-      return;
     }
-    setSelectedLead(null);
-    setIsAddandEditModalOpen(true);
+    if (!lead) {
+      setSelectedLead(null);
+      setIsAddandEditModalOpen(true);
+    }
   }
 
   function closeAddandEditModal() {

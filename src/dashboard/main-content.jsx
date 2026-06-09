@@ -47,42 +47,11 @@ export default function MainContent() {
 
   return (
     <section className="relative min-h-screen flex flex-col items-center px-10 pt-22">
-      <Filters
-        openModal={openAddAndEditModal}
-        search={searchValue}
-        handleSearch={handleSearch}
-        handleFilter={handleFilter}
-      />
+      <Filters />
 
-      {isMobile ? (
-        <MobileTable
-          openModal={openAddAndEditModal}
-          leads={filteredLeads}
-          onDelete={deleteLead}
-          onEdit={openAddAndEditModal}
-          sortBy={sortBy}
-          sortDir={sortDir}
-          handleSort={handleSort}
-        />
-      ) : (
-        <Table
-          openModal={openAddAndEditModal}
-          leads={filteredLeads}
-          onDelete={deleteLead}
-          onEdit={openAddAndEditModal}
-          sortBy={sortBy}
-          sortDir={sortDir}
-          handleSort={handleSort}
-        />
-      )}
+      {isMobile ? <MobileTable /> : <Table />}
 
-      <Modal
-        isModalOpen={isAddandEditModalOpen}
-        closeModal={closeAddandEditModal}
-        selectedLead={selectedLead}
-        editLead={editLead}
-        addLead={addLead}
-      />
+      <Modal />
       {totalPageCount > 1 ? <Pagination /> : null}
     </section>
   );

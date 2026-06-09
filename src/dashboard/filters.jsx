@@ -1,11 +1,10 @@
 import FilterDropDown from "../components/filter-dropdown";
+import { useLeads } from "../context/LeadsContext";
 
-export default function Filters({
-  openModal,
-  search,
-  handleSearch,
-  handleFilter,
-}) {
+export default function Filters() {
+  const { openAddAndEditModal, searchValue, handleSearch, handleFilter } =
+    useLeads();
+
   const statusFilters = [
     { label: "Status", value: null },
     { label: "All", value: null },
@@ -45,7 +44,7 @@ export default function Filters({
           <button
             id="add-lead-btn"
             className="bg-indigo-600 text-xs text-white px-4 rounded-xl h-full hover:bg-indigo-500 transition shadow-[0_10px_30px_rgba(79,70,229,0.35)] add-lead-btn"
-            onClick={() => openModal()}
+            onClick={() => openAddAndEditModal()}
           >
             + Add Lead
           </button>
@@ -127,7 +126,7 @@ export default function Filters({
           placeholder-slate-500
           focus:outline-none focus:ring-0
         "
-            value={search}
+            value={searchValue}
             onChange={(e) => handleSearch(e.target.value)}
           />
         </div>

@@ -3,38 +3,29 @@ import StatusSelect from "./StatusSelect";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/dark.css";
 import DestinationSelect from "./DestinationSelect";
+import { useLeads } from "../context/LeadsContext";
 
-////// modal call btnnn
+export default function Modal() {
+  const {
+    isAddandEditModalOpen,
+    closeAddandEditModal,
+    selectedLead,
+    editLead,
+    addLead,
+  } = useLeads();
 
-// <button id="add-lead-btn" className="bg-black text-sm text-gray-50 w-24 rounded-md h-full cursor-pointer
-
-// add-lead-btn
-
-// ">
-// +  Add Lead
-// </button>
-
-///////
-
-export default function Modal({
-  isModalOpen,
-  closeModal,
-  selectedLead,
-  addLead,
-  editLead,
-}) {
   // esc listener to close modal
   useEffect(() => {
-    if (!isModalOpen) return;
+    if (!isAddandEditModalOpen) return;
 
-    const esc = (e) => e.key === "Escape" && closeModal();
+    const esc = (e) => e.key === "Escape" && closeAddandEditModal();
     window.addEventListener("keydown", esc);
     return () => window.removeEventListener("keydown", esc);
-  }, [isModalOpen]);
+  }, [isAddandEditModalOpen]);
 
   //stopping scroll behaviour while modal is open
   useEffect(() => {
-    if (isModalOpen) {
+    if (isAddandEditModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -43,7 +34,7 @@ export default function Modal({
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isModalOpen]);
+  }, [isAddandEditModalOpen]);
 
   // state for the modal form
   const [formData, setFormData] = useState({
@@ -58,7 +49,6 @@ export default function Modal({
   });
 
   // check for open or edit modal
-
   useEffect(() => {
     if (selectedLead) {
       setFormData({
@@ -83,7 +73,7 @@ export default function Modal({
         callRecap: "",
       });
     }
-  }, [isModalOpen]);
+  }, [isAddandEditModalOpen]);
 
   // on form submit fn
   const submitForm = async (e) => {
@@ -105,7 +95,7 @@ export default function Modal({
       date: new Date(),
       callRecap: "",
     });
-    closeModal();
+    closeAddandEditModal();
   };
 
   // On Change Function for the status select dropDown Comp.
@@ -120,10 +110,10 @@ export default function Modal({
   }
 
   return (
-    isModalOpen && (
+    isAddandEditModalOpen && (
       <div
         className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center z-50 px-4  "
-        onClick={closeModal}
+        onClick={closeAddandEditModal}
       >
         <div
           className="
@@ -144,7 +134,7 @@ export default function Modal({
               Add New Lead
             </h2>
             <button
-              onClick={closeModal}
+              onClick={closeAddandEditModal}
               className="text-xl text-slate-400 hover:text-white transition cursor-pointer leading-none"
             >
               ×

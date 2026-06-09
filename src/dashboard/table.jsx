@@ -1,15 +1,11 @@
 import { useState } from "react";
 import TableRow from "./table-row";
+import { useLeads } from "../context/LeadsContext";
 
-export default function Table({
-  openModal,
-  leads,
-  onDelete,
-  onEdit,
-  sortBy,
-  sortDir,
-  handleSort,
-}) {
+export default function Table() {
+  const { openAddAndEditModal, filteredLeads, sortDir, sortBy, handleSort } =
+    useLeads();
+
   return (
     <main className="mt-6 w-full xl:w-5/6 bg-white/5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-xl">
       <div className="px-4 py-4 border-b border-white/10">
@@ -125,8 +121,10 @@ export default function Table({
           </thead>
 
           <tbody className="divide-y divide-white/10">
-            {leads.length > 0 ? (
-              leads.map((lead) => <TableRow key={lead.id} lead={lead} />)
+            {filteredLeads.length > 0 ? (
+              filteredLeads.map((lead) => (
+                <TableRow key={lead.id} lead={lead} />
+              ))
             ) : (
               <tr>
                 <td colSpan="9" className="py-14 text-center">
@@ -140,7 +138,7 @@ export default function Table({
                     <button
                       id="add-lead-btn"
                       className="bg-indigo-600 text-xs text-white px-4 rounded-xl h-full hover:bg-indigo-500 transition shadow-[0_10px_30px_rgba(79,70,229,0.35)] add-lead-btn"
-                      onClick={openModal}
+                      onClick={() => openAddAndEditModal()}
                     >
                       + Add Lead
                     </button>
