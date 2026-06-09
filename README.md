@@ -102,6 +102,7 @@ VITE_SUPABASE_ANON_KEY=your_anon_key
 
 ## About
 
-Built as a portfolio project to demonstrate a production-style frontend application — real auth, real security policies, and a UI built around an actual use case rather than placeholder data.
 
-Part of a two-project portfolio. Built by [John Fenhas](https://github.com/John-Fenhas).
+A portfolio project. Built by [John Fenhas](https://github.com/John-Fenhas).
+
+
