@@ -2,25 +2,49 @@ import { useState, useRef, useEffect } from "react";
 
 const statuses = [
   { label: "Fresh", value: "fresh", color: "bg-blue-500/20 text-blue-400" },
-  { label: "No Answer", value: "no_answer", color: "bg-slate-500/20 text-slate-400" },
-  { label: "Call Back", value: "callback", color: "bg-amber-500/20 text-amber-400" },
-  { label: "Follow-up", value: "follow_up", color: "bg-violet-500/20 text-violet-400" },
-  { label: "Meeting Booked", value: "meeting_booked", color: "bg-emerald-500/20 text-emerald-400" },
-  { label: "Site Visit", value: "site_visit", color: "bg-cyan-500/20 text-cyan-400" },
-  { label: "Low Budget", value: "low_budget", color: "bg-orange-500/20 text-orange-400" },
-  { label: "Not Interested", value: "not_interested", color: "bg-red-500/20 text-red-400" },
+  {
+    label: "No Answer",
+    value: "no_answer",
+    color: "bg-slate-500/20 text-slate-400",
+  },
+  {
+    label: "Call Back",
+    value: "callback",
+    color: "bg-amber-500/20 text-amber-400",
+  },
+  {
+    label: "Follow-up",
+    value: "follow_up",
+    color: "bg-violet-500/20 text-violet-400",
+  },
+  {
+    label: "Meeting Booked",
+    value: "meeting_booked",
+    color: "bg-emerald-500/20 text-emerald-400",
+  },
+  {
+    label: "Site Visit",
+    value: "site_visit",
+    color: "bg-cyan-500/20 text-cyan-400",
+  },
+  {
+    label: "Low Budget",
+    value: "low_budget",
+    color: "bg-orange-500/20 text-orange-400",
+  },
+  {
+    label: "Not Interested",
+    value: "not_interested",
+    color: "bg-red-500/20 text-red-400",
+  },
 ];
 
-export default function StatusSelect({
-  value,
-  onChange,
-}) {
-  
+export default function StatusSelect({ value, onChange }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
   const currentValue = value === "Fresh" ? "Fresh" : value;
-  const selected = statuses.find(s => s.label === currentValue);
+  const selected = statuses.find((s) => s.label === currentValue);
 
   useEffect(() => {
     const handler = (e) => {
@@ -32,8 +56,7 @@ export default function StatusSelect({
   }, []);
 
   return (
-    <div ref={ref} className="relative w-ful">
-
+    <div ref={ref} className="relative w-full">
       <button
         type="button"
         onClick={() => setOpen(!open)}
@@ -50,19 +73,24 @@ export default function StatusSelect({
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </button>
 
       {open && (
-        <div className="absolute z-50 mt-1 w-full rounded-xl border border-white/10 bg-slate-950 shadow-xl overflow-hidden max-h-56 overflow-y-auto"
-          style={{ 
-          scrollbarWidth: "thin",     
-          scrollbarColor: "rgba(255,255,255,0.2) transparent", 
+        <div
+          className="absolute z-50 mt-1 w-full rounded-xl border border-white/10 bg-slate-950 shadow-xl overflow-hidden max-h-56 overflow-y-auto"
+          style={{
+            scrollbarWidth: "thin",
+            scrollbarColor: "rgba(255,255,255,0.2) transparent",
           }}
         >
-
-          {statuses.map(status => (
+          {statuses.map((status) => (
             <div
               key={status.value}
               onClick={() => {
@@ -76,10 +104,8 @@ export default function StatusSelect({
               </span>
             </div>
           ))}
-
         </div>
       )}
-
     </div>
   );
 }

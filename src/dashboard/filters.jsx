@@ -33,7 +33,7 @@ export default function Filters() {
   ];
 
   return (
-    <div className="w-full xl:w-5/6 ">
+    <div className="w-full xl:w-5/6 z-20">
       {/* Header */}
       <div className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 flex justify-between items-center shadow-2xl backdrop-blur-xl">
         <div className="flex items-center gap-2">

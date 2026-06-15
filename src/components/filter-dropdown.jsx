@@ -20,7 +20,7 @@ export default function FilterDropDown({ filter, listOfFilters }) {
   }, []);
 
   return (
-    <div ref={ref} className="relative w-ful">
+    <div ref={ref} className="relative">
       <button
         type="button"
         onClick={() => setOpen(!open)}
